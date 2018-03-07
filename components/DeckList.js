@@ -13,21 +13,22 @@ import { AppLoading } from 'expo'
 class DeckList extends Component {
 
     state = {
-        ready: false,
+        ready: false
     }
 
     componentDidMount() {
+
         const { dispatch } = this.props
 
         fetchDecks()
-            .then((decks) => dispatch(receiveDecks(decks)))
+            .then(decks => dispatch(receiveDecks(decks)))
             .then(() => this.setState(() => ({ ready: true })))
     }
 
     render() {
 
-        const { ready } = this.state
         const { decks } = this.props
+        const { ready } = this.state
 
         if (!ready) {
             return <AppLoading />
@@ -96,9 +97,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(decks) {
-    return {
-        decks
-    }
+    return { decks }
 }
 
 export default connect(mapStateToProps)(DeckList)
